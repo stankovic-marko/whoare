@@ -19,8 +19,10 @@ if __name__ == "__main__":
     while not ip == "":
         ips.append(ip.replace("\n", ""))
         ip = file.readline()
-    
+    file.close()
+
     outfile = open("out.json", "w")
+    outfile.write("[")
     current_server = 0
     batch_request = 0
     request = 0
@@ -48,8 +50,13 @@ if __name__ == "__main__":
 
         if(data.status_code == 200):
             json.dump(data.json(), outfile)
+            if(request < len(ips)):
+                outfile.write(",")
         else:
             print("Error status code. Switching to next server.")
             current_server = current_server + 1
             batch_request = 0
+    
+    outfile.write("]")
+    outfile.close()
     print("Finished. ", request, " ips checked.")

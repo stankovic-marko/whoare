@@ -1,2 +1,4 @@
+# whoare
+
 ## Usage
-> python /.whoare.py "ips.txt"
+> python /.whoare.py <ip-list.txt>
